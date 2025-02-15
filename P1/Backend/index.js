@@ -2,8 +2,10 @@ const  global = require('./src/const/global');
 const producto = require('./src/controllers/producto.controller')
 
 const express = require('express');
+const cors = require("cors");
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 // Ruta
 app.get('/', (req, res) => {

@@ -1,7 +1,8 @@
 const Producto = require('../models/Productos');
+const inventario_dummy = require("../data/productos");
 
 // Estructura de datos para almacenar productos
-let inventario = [];
+let inventario = inventario_dummy;
 
 // Agregar un producto
 function agregarProducto (nombre, cantidad, precio) {
