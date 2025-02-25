@@ -48,32 +48,5 @@ Framework minimalista para Node.js que facilita la creación de aplicaciones web
 - Menos flexible para cambios de esquema rápidos
 - La integración con Node.js requiere configuración adicional
 
-### Conexión a SQL Server desde Node.js
-
-Para conectar Node.js con SQL Server se utiliza típicamente el paquete `mssql` o `tedious`.
-
-```javascript
-const sql = require('mssql');
-
-const config = {
-  user: 'username',
-  password: 'password',
-  server: 'localhost',
-  database: 'database',
-  options: {
-    encrypt: true,
-    trustServerCertificate: true
-  }
-};
-
-async function connectDB() {
-  try {
-    await sql.connect(config);
-    console.log('Conectado a SQL Server');
-  } catch (err) {
-    console.error('Error al conectar a SQL Server:', err);
-  }
-}
-```
 
 ![er](./P2/DIAGRAMA.png)
