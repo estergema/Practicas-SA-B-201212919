@@ -23,7 +23,7 @@ async function login(req, res) {
             {
                 replacements: {
                     correo: correo,
-                    password: password,
+                    password: auth.encryptPassword(password),
                 },
                 type: Sequelize.QueryTypes.SELECT,
             }
@@ -52,10 +52,10 @@ async function login(req, res) {
             maxAge: 24 * 60 * 60 * 1000, // Tiempo de vida en milisegundos
         });
 
-        res.json({ message: 'Autenticación exitosa.' });
+        return res.json({ message: 'Autenticación exitosa.' });
     } catch (err) {
         console.error('Error en login:', err);
-        res.status(500).send('Error interno del servidor.');
+        return res.status(500).send('Error interno del servidor.');
     }
 }
 
