@@ -40,28 +40,6 @@ app.get("/orders", (req, res) => {
   res.json(orders)
 })
 
-// Create a new order
-app.post("/orders", (req, res) => {
-  const { userId, products } = req.body
-
-  if (!userId || !products || !Array.isArray(products) || products.length === 0) {
-    return res.status(400).json({ message: "Invalid order data" })
-  }
-
-  const totalAmount = products.reduce((sum, item) => sum + item.price * item.quantity, 0)
-
-  const newOrder = {
-    id: String(orders.length + 1),
-    userId,
-    products,
-    totalAmount,
-    status: "pending",
-    createdAt: new Date().toISOString(),
-  }
-  orders.push(newOrder)
-  res.status(201).json(newOrder)
-})
-
 app.listen(global.PORT, () => {
   console.log(`Orders service running at http://localhost:${global.PORT}`)
 })
