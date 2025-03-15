@@ -8,7 +8,7 @@ app.use(express.json());
 app.use(cors());
 
 // Ruta
-app.get('/', (req, res) => {
+app.get('/check', (req, res) => {
   res.send('¡Hola, mundo!');
 });
 

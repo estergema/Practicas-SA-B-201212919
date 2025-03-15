@@ -1,21 +1,6 @@
 version: '3.8'
 
 services:
-  api-gateway:
-    build: ./api-gateway
-    ports:
-      - "4000:4000"
-    environment:
-      - PRODUCT_SERVICE_URL=http://product-service:4001
-      - USER_SERVICE_URL=http://user-service:4002
-      - ORDER_SERVICE_URL=http://order-service:4003
-      - NOTIFICATION_SERVICE_URL=http://notification-service:4004
-    depends_on:
-      - product-service
-      - user-service
-      - order-service
-      - notification-service
-
   product-service:
     build: ./product-service
     ports:

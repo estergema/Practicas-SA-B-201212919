@@ -15,7 +15,7 @@ async function startServer() {
   await server.start()
   server.applyMiddleware({ app })
 
-  app.get("/health", (req, res) => {
+  app.get("/check", (req, res) => {
     res.status(200).json({ status: "ok", service: "users" })
   })
 

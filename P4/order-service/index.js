@@ -31,7 +31,7 @@ const orders = [
 ]
 
 // Health check endpoint
-app.get("/", (req, res) => {
+app.get("/check", (req, res) => {
   res.status(200).json({ status: "ok", service: "orders" })
 })
 

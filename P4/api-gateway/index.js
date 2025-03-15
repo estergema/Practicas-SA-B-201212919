@@ -64,22 +64,22 @@ app.use(
 )
 
 // Catch-all route for health checks of individual services
-app.get("/services/:service/health", async (req, res) => {
+app.get("/services/:service/check", async (req, res) => {
   const { service } = req.params
   let serviceUrl
 
   switch (service) {
     case "products":
-      serviceUrl = `${global.PRODUCT_SERVICE_URL}/health`
+      serviceUrl = `${global.PRODUCT_SERVICE_URL}/check`
       break
     case "users":
-      serviceUrl = `${global.USER_SERVICE_URL}/health`
+      serviceUrl = `${global.USER_SERVICE_URL}/check`
       break
     case "orders":
-      serviceUrl = `${global.ORDER_SERVICE_URL}/health`
+      serviceUrl = `${global.ORDER_SERVICE_URL}/check`
       break
     case "notifications":
-      serviceUrl = `${global.NOTIFICATION_SERVICE_URL}/health`
+      serviceUrl = `${global.NOTIFICATION_SERVICE_URL}/check`
       break
     default:
       return res.status(404).json({ error: "Service not found" })
