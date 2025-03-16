@@ -19,7 +19,6 @@ type Notification struct {
 	SentAt    time.Time `json:"sentAt,omitempty"`
 }
 
-// In-memory database for demonstration
 var notifications []Notification
 
 func main() {
@@ -29,7 +28,7 @@ func main() {
 			ID:        "1",
 			UserID:    "1",
 			Type:      "email",
-			Message:   "Your order #1 has been shipped!",
+			Message:   "Orden enviada!",
 			Status:    "sent",
 			CreatedAt: time.Now().Add(-24 * time.Hour),
 			SentAt:    time.Now().Add(-24 * time.Hour),
@@ -38,7 +37,7 @@ func main() {
 			ID:        "2",
 			UserID:    "2",
 			Type:      "email",
-			Message:   "Your order #2 is being processed.",
+			Message:   "Orden recibida.",
 			Status:    "sent",
 			CreatedAt: time.Now().Add(-12 * time.Hour),
 			SentAt:    time.Now().Add(-12 * time.Hour),
@@ -48,9 +47,6 @@ func main() {
 	// Define routes
 	http.HandleFunc("/check", healthCheckHandler)
 	http.HandleFunc("/notifications", getNotificationsHandler)
-	http.HandleFunc("/notifications/send", sendNotificationHandler)
-	http.HandleFunc("/users/", getUserNotificationsHandler)
-
 	// Start server
 	port := 4004
 	fmt.Printf("Notification service running at http://localhost:%d\n", port)

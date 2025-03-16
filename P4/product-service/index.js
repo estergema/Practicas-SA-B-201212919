@@ -9,7 +9,7 @@ app.use(cors());
 
 // Ruta
 app.get('/check', (req, res) => {
-  res.send('¡Hola, mundo!');
+  res.status(200).json({ status: "ok", service: "productos" })
 });
 
 app.post("/producto", (req, res) => {

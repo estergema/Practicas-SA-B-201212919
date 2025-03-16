@@ -21,7 +21,7 @@ app.use(
   createProxyMiddleware({
     target: global.PRODUCT_SERVICE_URL,
     pathRewrite: {
-      "^/products": "/graphql",
+      "^/products": "/productos",
     },
     changeOrigin: true,
   }),
@@ -33,7 +33,7 @@ app.use(
   createProxyMiddleware({
     target: global.USER_SERVICE_URL,
     pathRewrite: {
-      "^/users": "/graphql",
+      "^/users": "/users",
     },
     changeOrigin: true,
   }),
