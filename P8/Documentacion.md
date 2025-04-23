@@ -229,3 +229,72 @@ Ir a `http://localhost:5601` en tu navegador.
 - Prometheus: `http://localhost:9090`
 - Grafana: `http://localhost:3000`
 - Kibana: `http://localhost:5601`
+
+
+### Acceder a Dashboards
+
+#### Grafana
+
+1. Abre en navegador: `http://localhost:3000`
+2. Inicia sesión con usuario `admin`.
+3. Ve a **"Add Data Source"** y selecciona **Prometheus** o **Elasticsearch** según el caso.
+4. Crea paneles desde **"Dashboards > New"**.
+5. Personaliza con métricas, alertas y visualizaciones gráficas.
+
+
+## Funcionalidades Clave de Monitoreo y Registro
+
+### Prometheus - Configuración de Alertas
+
+Prometheus permite crear alertas basadas en métricas monitoreadas. Estas alertas se definen en archivos de reglas.
+
+#### Ejemplo de Regla de Alerta
+
+Archivo: `/etc/prometheus/alert.rules.yml`
+
+```yaml
+groups:
+  - name: alert_rules
+    rules:
+      - alert: InstanciaCaida
+        expr: up == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Instancia {{ $labels.instance }} está caída"
+```
+
+#### Configurar en `prometheus.yml`
+
+```yaml
+rule_files:
+  - "alert.rules.yml"
+```
+
+#### Integración con Alertmanager
+
+Prometheus puede enviar alertas a Alertmanager para su enrutamiento vía correo, Slack, etc.
+
+```yaml
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets: ["localhost:9093"]
+```
+
+---
+
+### Grafana - Creación de Paneles
+
+Grafana permite visualizar métricas desde Prometheus, Elasticsearch y más.
+
+#### Crear un Panel Paso a Paso
+
+1. Ingresa a `http://localhost:3000` y entra con tu usuario.
+2. Haz clic en **Dashboards > New**.
+3. Selecciona **"Add a new panel"**.
+4. En la consulta, selecciona tu fuente de datos (ej. Prometheus).
+5. Ingresa una consulta como: `rate(http_requests_total[1m])`.
+6. Personaliza el gráfico (línea, barras, gauge, etc).
+7. Guarda el panel y asigna un nombre al dashboard.
