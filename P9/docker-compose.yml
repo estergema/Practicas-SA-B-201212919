@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  product-service:
+    build: ./product-service
+    ports:
+      - "4001:4001"
+
+  user-service:
+    build: ./user-service
+    ports:
+      - "4002:4002"
+
+  order-service:
+    build: ./order-service
+    ports:
+      - "4003:4003"
+
+  notification-service:
+    build: ./notification-service
+    ports:
+      - "4004:4004"
+

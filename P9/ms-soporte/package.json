@@ -1,0 +1,23 @@
+{
+  "name": "chatbot-compras-backend",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Backend para chatbot de compras con Google Cloud AI",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test-agent": "node test-agent.js"
+  },
+  "dependencies": {
+    "@google-cloud/vertexai": "^1.5.0",
+    "@google/generative-ai": "^0.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "node-fetch": "^3.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
