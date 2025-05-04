@@ -16,6 +16,7 @@ app.use(express.json())
 
 // URL del endpoint de productos (configurable desde .env)
 const PRODUCTS_API_URL = process.env.PRODUCTS_API_URL 
+const ORDERS_API_URL = process.env.ORDERS_API_URL 
 
 // Configuración para Google Cloud
 const PROJECT_ID = process.env.GOOGLE_CLOUD_PROJECT_ID
@@ -60,7 +61,7 @@ const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY)
 // Función para obtener productos del endpoint externo
 async function fetchProducts(query = "") {
   try {
-    const response = await fetch(PRODUCTS_API_URL)
+    const response = await fetch(PRODUCTS_API_URL+'/productos')
     if (!response.ok) {
       throw new Error(`Error al obtener productos: ${response.status}`)
     }
@@ -68,6 +69,23 @@ async function fetchProducts(query = "") {
     let products = await response.json()
 
     return products
+  } catch (error) {
+    console.error("Error fetching products:", error)
+    return []
+  }
+}
+
+// Función para obtener productos del endpoint externo
+async function fetchOrdenes(query = "") {
+  try {
+    const response = await fetch(ORDERS_API_URL+'/orders')
+    if (!response.ok) {
+      throw new Error(`Error al obtener productos: ${response.status}`)
+    }
+
+    let orders = await response.json()
+    // Si hay una consulta, filtramos los productos
+    return orders
   } catch (error) {
     console.error("Error fetching products:", error)
     return []
@@ -247,26 +265,36 @@ app.post("/api/chat-simple", async (req, res) => {
 
     // Verificar si el mensaje contiene una consulta de productos
     let products = []
+    let orders = {}
     if (
-      userQuestion.toLowerCase().includes("busca") ||
+      (userQuestion.toLowerCase().includes("busca") ||
       userQuestion.toLowerCase().includes("encuentra") ||
-      userQuestion.toLowerCase().includes("muestra") ||
-      userQuestion.toLowerCase().includes("productos")
-    ) {
-      // Extraer posibles términos de búsqueda
-      const searchTerms = userQuestion.split(" ").filter((word) => word.length > 3)
-      if (searchTerms.length > 0) {
-        // Usar el término más largo como consulta
-        const searchQuery = searchTerms.reduce((a, b) => (a.length > b.length ? a : b))
-        products = await fetchProducts(searchQuery)
+      userQuestion.toLowerCase().includes("muestra"))
+    ){
+        if (userQuestion.toLowerCase().includes("productos")) {
+        // Extraer posibles términos de búsqueda
+        const searchTerms = userQuestion.split(" ").filter((word) => word.length > 3)
+        if (searchTerms.length > 0) {
+          // Usar el término más largo como consulta
+          const searchQuery = searchTerms.reduce((a, b) => (a.length > b.length ? a : b))
+          products = await fetchProducts(searchQuery)
+        }
+      } else if( userQuestion.toLowerCase().includes("ordenes") ) {
+        // Extraer posibles términos de búsqueda
+        const searchTerms = userQuestion.split(" ").filter((word) => word.length > 3)
+        if (searchTerms.length > 0) {
+          // Usar el término más largo como consulta
+          const searchQuery = searchTerms.reduce((a, b) => (a.length > b.length ? a : b))
+          orders = await fetchOrdenes(searchQuery)
+        }
       }
     }
-
     // Devolver la respuesta
     res.json({
       role: "assistant",
       content: response.text(),
       products: products.length > 0 ? products : null,
+      orders: orders.length > 0 ? orders : null,
     })
   } catch (error) {
     console.error("Error in chat-simple endpoint:", error)

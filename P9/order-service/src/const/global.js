@@ -4,6 +4,6 @@ const dotenv = require('dotenv');
 dotenv.config();
  
 module.exports = {    
-    PORT : process.env.PORT || 4003,
+    PORT : process.env.PORT || 4002,
  }
 
