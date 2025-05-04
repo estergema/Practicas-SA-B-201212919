@@ -180,18 +180,6 @@ const ChatbotApp = ({ usuario }) => {
 
   const agregarAlCarrito = async (idProducto) => {
     try {
-      const respuesta = await fetch(`${baseCompras}`+'/carrito', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          idUsuario: datosUsuario.idUsuario,
-          idProducto,
-          cantidad: 1 // puedes personalizar la cantidad si quieres
-        })
-      });
-      if (!respuesta.ok) throw new Error("Error al agregar al carrito");
       alert("Producto agregado al carrito");
     } catch (error) {
       console.error(error);

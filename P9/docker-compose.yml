@@ -13,5 +13,14 @@ services:
 
   soporte-service:
     build: ./soporte-service
+    environment:
+      - PORT=5000
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+      - PRODUCTS_API_URL=http://products-mock:3001/productos
+      - GOOGLE_CLOUD_PROJECT_ID=${GOOGLE_CLOUD_PROJECT_ID}
+      - GOOGLE_CLOUD_LOCATION=${GOOGLE_CLOUD_LOCATION}
+      - GOOGLE_CLOUD_AGENT_ID=${GOOGLE_CLOUD_AGENT_ID}
+    volumes:
+      - ./google-credentials.json:/app/google-credentials.json
     ports:
       - "4003:4003"

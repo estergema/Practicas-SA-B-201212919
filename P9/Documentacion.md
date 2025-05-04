@@ -1,23 +1,41 @@
-# Practica 3
-
+# Practica 9
 Estrellita Guadalupe Armas Monroy - 201212919
 
-● [Contratos de microservicios](https://documenter.getpostman.com/view/25929838/2sAYkBt1oL)
+# Chatbot con Node.js, React-Vite y Google Cloud AI
 
-● Dockerfile de cada microservicio.
+Este proyecto implementa un chatbot utilizando Node.js como backend, React-Vite como frontend y Google Cloud AI para la funcionalidad del chatbot.
 
-[Servicio de notificaciones/Dockerfile](./notification-service/Dockerfile)
-[Servicio de ordenes/Dockerfile](./order-service/Dockerfile)
-[Servicio de productos/Dockerfile](./product-service/Dockerfile)
-[Servicio de usuarioS/Dockerfile](./user-service/Dockerfile)
+## Características
 
-● Archivo yaml (Docker compose)
+- Interfaz de chat intuitiva
+- Integración con Google Cloud AI 
+- Diseño responsive
 
-[docker-compose.yml](docker-compose.yml)
+## Requisitos Previos
 
+- Node.js (v14 o superior)
+- Cuenta de Google Cloud con API key para Generative AI
+- npm o yarn
 
-● Diagrama de Arquitectura
+## Diagrama de Arquitectura
 
 ![arquitectura](./Imagenes/arquitectura.png)
 
-● Diagrama ER de las bases de datos utilizadas
+- `/frontend`(PC): Aplicación React con Vite
+- Microservicios:
+    - `/ms-soporte` : microservicio encargado de la funcionalidad del chat
+    - `/product-service`: microservicio encargado de la funcionalidad de los productos
+    - `/order-service` : microservicio encargado de funcionalidad de ordenes
+    
+
+
+
+● [Contratos de microservicios](https://documenter.getpostman.com/view/25929838/2sAYkBt1oL)
+
+#### Dockerfile de cada microservicio.
+
+[Servicio de soporte/Dockerfile](./soporte-service/Dockerfile)
+[Servicio de ordenes/Dockerfile](./order-service/Dockerfile)
+[Servicio de productos/Dockerfile](./product-service/Dockerfile)
+
+
