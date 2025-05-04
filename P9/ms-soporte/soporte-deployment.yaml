@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: soporte-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: soporte
+  template:
+    metadata:
+      labels:
+        app: soporte
+    spec:
+      containers:
+      - name: soporte
+        image: gcr.io/spry-connection-456021-a3/soporte
+        ports:
+        - containerPort: 4003  # o el puerto que use tu app

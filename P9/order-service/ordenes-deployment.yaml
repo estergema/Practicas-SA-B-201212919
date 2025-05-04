@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ordenes-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ordenes
+  template:
+    metadata:
+      labels:
+        app: ordenes
+    spec:
+      containers:
+      - name: ordenes
+        image: gcr.io/spry-connection-456021-a3/ordenes
+        ports:
+        - containerPort: 4002  # o el puerto que use tu app

@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import './ChatbotApp.css';
 
 const baseSoporte = import.meta.env.VITE_URL_API_SOPORTE;
-const baseCompras = import.meta.env.VITE_URL_API_COMPRAS;
 
 const ChatbotApp = ({ usuario }) => {
   const [messages, setMessages] = useState([

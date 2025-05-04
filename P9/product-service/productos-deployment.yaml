@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: productos-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: productos
+  template:
+    metadata:
+      labels:
+        app: productos
+    spec:
+      containers:
+      - name: productos
+        image: gcr.io/spry-connection-456021-a3/productos
+        ports:
+        - containerPort: 4002  # o el puerto que use tu app
